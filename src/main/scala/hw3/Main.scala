@@ -1,13 +1,38 @@
 package hw3
 
-object Main {
-  def standardDeviation(vector: List[Double]): Double = ???
+object Main extends App {
+  def standardDeviation(vector: List[Double]): Double =
+  {
+
+    val mean = vector.sum/vector.length
+    val sd = Math.sqrt((vector.map( _ - mean).map(t => t*t).sum)/vector.length)
+    sd
+  }
 
   def letterFrequencyRanking(corpus: String): String = ???
 
   def romanji(katakana: String): String = ???
 
-  def gray(bits: Int): List[String] = ???
+
+  def gray(bits: Int): List[String] =
+  {
+    var grays : Map[Int,List[String]] = Map()
+    grays.get(bits) match
+    {
+      case Some(res) => res
+      case _ => val res = bits match
+      {
+        case 0 => Nil
+        case 1 => List("0","1")
+        case _ =>
+        val others = gray(bits-1)
+        val reflected = others.reverse
+        others.map("0" + _) ++ reflected.map("1" + _)
+      }
+      grays = grays + (bits -> res)
+      res
+    }
+  }
 }
 
 object Katakana {
